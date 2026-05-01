@@ -771,6 +771,12 @@ require('lazy').setup({
         python = { 'isort', 'black' },
         tex = { 'latexindent' },
         ocaml = { 'ocamlformat' },
+        sh = { 'shfmt' },
+        bash = { 'shfmt' },
+        c = { 'clang_format' },
+        cpp = { 'clang_format' },
+        toml = { 'taplo' },
+        make = { 'mbake' },
         -- You can use 'stop_after_first' to run the first available formatter from the list
         javascript = { 'prettierd', 'prettier', stop_after_first = true },
         typescript = { 'prettierd', 'prettier', stop_after_first = true },
@@ -1017,11 +1023,12 @@ require('lazy').setup({
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require 'custom.plugins.lazygit',
   -- require 'custom.plugins.ocaml',
-  -- require 'custom.plugins.obsidian', -- TODO: Fix this?
+  require 'custom.plugins.obsidian', -- TODO: Fix this?
   require 'custom.plugins.coqtail',
   require 'custom.plugins.vimtex',
   require 'custom.plugins.tabout',
-  -- require 'custom.homemade.example',
+  require 'custom.homemade.example',
+  require 'custom.homemade.plant',
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.

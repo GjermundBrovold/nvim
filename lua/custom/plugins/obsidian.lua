@@ -21,14 +21,11 @@ return {
     workspaces = {
       {
         name = 'personal',
-        path = '~/vaults/personal',
-      },
-      {
-        name = 'work',
-        path = '~/vaults/work',
+        path = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/TheVaultToRuleThemAll',
       },
     },
-
-    -- see below for full list of options 👇
+    ui = {
+      enable = false,
+    },
   },
 }

@@ -3,6 +3,6 @@ return {
   lazy = false,
   -- tag = "" - uncomment for version
   init = function()
-    vim.g.vimtex_view_method = 'skim' -- set pdf viewer
+    vim.g.vimtex_view_method = 'zathura' -- set pdf viewer
   end,
 }
