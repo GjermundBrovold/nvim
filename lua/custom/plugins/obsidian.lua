@@ -1,3 +1,8 @@
+local linux_path = '~/obsidian_vault'
+local macos_path = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/TheVaultToRuleThemAll'
+
+local os_name = jit.os
+
 return {
   'epwalsh/obsidian.nvim',
   version = '*', -- recommended, use latest release instead of latest commit
@@ -21,7 +26,7 @@ return {
     workspaces = {
       {
         name = 'personal',
-        path = '~/Library/Mobile Documents/iCloud~md~obsidian/Documents/TheVaultToRuleThemAll',
+        path = os_name == 'Linux' and linux_path or macos_path,
       },
     },
     ui = {
