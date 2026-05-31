@@ -1,7 +1,5 @@
-return {
-  'tarides/ocaml.nvim',
-  dependencies = { 'neovim/nvim-lspconfig' },
-  config = function()
-    require('ocaml').setup()
-  end,
+vim.pack.add {
+  'https://github.com/tarides/ocaml.nvim',
+  'https://github.com/neovim/nvim-lspconfig',
 }
+require('ocaml').setup()
