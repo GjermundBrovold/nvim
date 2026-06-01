@@ -391,9 +391,16 @@ do
   -- ... and there is more!
   -- Check out: https:://github.com/nvim-mini/mini.nvim
   -- Todo figure out how to get this back.
-  -- require('mini.starter').setup {
-  --   header = 'Custom Logo',
-  -- }
+
+  -- Start Up screen
+  -- TODO: add something nice here
+  require('mini.starter').setup {
+    header = 'Custom Logo',
+  }
+
+  -- Trees are bad :)
+  require('mini.files').setup()
+  vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', {desc = 'Open Mini Files'})
 end
 
 -- ============================================================
@@ -963,10 +970,9 @@ do
   -- require 'kickstart.plugins.indent_line',
   -- require 'kickstart.plugins.lint',
   -- require 'kickstart.plugins.autopairs',
-  -- require 'kickstart.plugins.neo-tree',
   require 'kickstart.plugins.gitsigns' -- adds gitsigns recommend keymaps
   require 'custom.plugins.lazygit'
-  -- require 'custom.plugins.ocaml'
+  -- require 'custom.plugins.ocaml' -- TODO: why did I comment out this?
   require 'custom.plugins.obsidian' -- TODO: Fix this?
   require 'custom.plugins.coqtail'
   require 'custom.plugins.vimtex'
