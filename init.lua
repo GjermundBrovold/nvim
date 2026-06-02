@@ -32,6 +32,16 @@ do
   -- You can also add relative line numbers, to help with jumping.
   --  Experiment for yourself to see if you like it!
   vim.o.relativenumber = true
+  vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+    callback = function()
+      vim.o.relativenumber = true
+    end,
+  })
+  vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+    callback = function()
+      vim.o.relativenumber = false
+    end,
+  })
 
   -- Enable mouse mode, can be useful for resizing splits for example!
   vim.o.mouse = 'a'
@@ -328,12 +338,12 @@ do
   --
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
 
-  vim.pack.add ({ 
+  vim.pack.add {
     {
-      src = "https://github.com/rose-pine/neovim",
-      name = "rose-pine",
+      src = 'https://github.com/rose-pine/neovim',
+      name = 'rose-pine',
     },
-  })
+  }
 
   ---@diagnostic disable-line: missing-fields
   require('rose-pine').setup()
@@ -400,7 +410,7 @@ do
 
   -- Trees are bad :)
   require('mini.files').setup()
-  vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', {desc = 'Open Mini Files'})
+  vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Open Mini Files' })
 end
 
 -- ============================================================
@@ -973,7 +983,7 @@ do
   require 'kickstart.plugins.gitsigns' -- adds gitsigns recommend keymaps
   require 'custom.plugins.lazygit'
   -- require 'custom.plugins.ocaml' -- TODO: why did I comment out this?
-  require 'custom.plugins.obsidian' -- TODO: Fix this?
+  -- require 'custom.plugins.obsidian' -- TODO: Fix this?
   require 'custom.plugins.coqtail'
   require 'custom.plugins.vimtex'
   require 'custom.homemade.example'
