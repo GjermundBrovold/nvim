@@ -417,6 +417,7 @@ do
   }
 
   -- Trees are bad :)
+  -- Maybe lookinto oil? But I think that this is probably kinda good enough for me
   require('mini.files').setup()
   vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Open Mini Files' })
 end
@@ -916,6 +917,9 @@ do
   -- Ensure basic parsers are installed
   local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
   require('nvim-treesitter').install(parsers)
+
+  local additional_parser = { 'tsx' }
+  require('nvim-treesitter').install(additional_parser)
 
   ---@param buf integer
   ---@param language string
