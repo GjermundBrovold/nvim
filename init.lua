@@ -12,11 +12,11 @@ do
   vim.g.maplocalleader = ' '
 
   -- TODO: find a place to put this thing.
-  vim.filetype.add {
-    filename = {
-      ['.clangd'] = 'yaml',
-    },
-  }
+  -- vim.filetype.add {
+  --   filename = {
+  --     ['.clangd'] = 'yaml',
+  --   },
+  -- }
 
   -- Set to true if you have a Nerd Font installed and selected in the terminal
   vim.g.have_nerd_font = true
@@ -413,13 +413,64 @@ do
   -- Start Up screen
   -- TODO: add something nice here
   require('mini.starter').setup {
-    header = 'Custom Logo',
+    header = 'Drink Water',
   }
 
   -- Trees are bad :)
   -- Maybe lookinto oil? But I think that this is probably kinda good enough for me
+  --
+
   require('mini.files').setup()
   vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Open Mini Files' })
+
+  -- Move mini.files picker to the center of the screen
+  -- ref: https://github.com/nvim-mini/mini.nvim/discussions/2173
+  --
+  -- Window with based on the offset from the center, i.e. center window
+  -- is 60, the next over is 20, then the rest are 10.
+  -- Can use more resolution if you want: { 60, 20, 20, 10, 5 }
+  local widths = { 60, 20, 10 }
+
+  local ensure_center_layout = function(ev)
+    local state = MiniFiles.get_explorer_state()
+    if state == nil then
+      return
+    end
+
+    -- Compute "depth offset" - how many windows are between this and focused
+    local path_this = vim.api.nvim_buf_get_name(ev.data.buf_id):match '^minifiles://%d+/(.*)$'
+    local depth_this
+    for i, path in ipairs(state.branch) do
+      if path == path_this then
+        depth_this = i
+      end
+    end
+    if depth_this == nil then
+      return
+    end
+    local depth_offset = depth_this - state.depth_focus
+
+    -- Adjust config of this event's window
+    local i = math.abs(depth_offset) + 1
+    local win_config = vim.api.nvim_win_get_config(ev.data.win_id)
+    win_config.width = i <= #widths and widths[i] or widths[#widths]
+
+    win_config.col = math.floor(0.5 * (vim.o.columns - widths[1]))
+    for j = 1, math.abs(depth_offset) do
+      local sign = depth_offset == 0 and 0 or (depth_offset > 0 and 1 or -1)
+      --widths[j+1] for the negative case becuase we don't want to add the cetner window's width
+      local prev_win_width = (sign == -1 and widths[j + 1]) or widths[j] or widths[#widths]
+      -- Add an extra +2 each step to account for the border width
+      win_config.col = win_config.col + sign * (prev_win_width + 2)
+    end
+
+    win_config.height = depth_offset == 0 and 25 or 20
+    win_config.row = math.floor(0.5 * (vim.o.lines - win_config.height))
+    win_config.border = { '🭽', '▔', '🭾', '▕', '🭿', '▁', '🭼', '▏' }
+    vim.api.nvim_win_set_config(ev.data.win_id, win_config)
+  end
+
+  vim.api.nvim_create_autocmd('User', { pattern = 'MiniFilesWindowUpdate', callback = ensure_center_layout })
 end
 
 -- ============================================================
@@ -918,7 +969,7 @@ do
   local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
   require('nvim-treesitter').install(parsers)
 
-  local additional_parser = { 'tsx' }
+  local additional_parser = { 'tsx', 'tmux' }
   require('nvim-treesitter').install(additional_parser)
 
   ---@param buf integer
@@ -962,7 +1013,7 @@ do
         -- Enable the parser if it is already installed
         treesitter_try_attach(buf, language)
       elseif vim.tbl_contains(available_parsers, language) then
-        -- If a parser is available in `nvim-treesitter`, auto-install it an enable it after the installation id done
+        -- If a parser is available in `nvim-treesitter`, auto-install it an enable it after the installation is done
         require('nvim-treesitter').install(language):await(function()
           treesitter_try_attach(buf, language)
         end)
