@@ -2,7 +2,9 @@
 -- Core Neovim settings, leaders, options, basic keymaps, basic autocmds
 -- ============================================================
 
+-- TODO: fix slow open/close time for neovim... it feels like there is some kind of syncing that must happen maybe to the disk? It is at least to slow.
 do
+  -- Folke magic cache utlize
   vim.loader.enable()
 
   -- Set <space> as the leader key
@@ -722,7 +724,7 @@ do
   local servers = {
     clangd = { _configs = {} },
     -- gopls = {},
-    -- pyright = {},
+    pyright = { _configs = {} },
     rust_analyzer = {
       _configs = {},
       -- cmd = { ... },
@@ -845,7 +847,7 @@ do
     -- You can also specify external formatter in here.
     formatters_by_ft = {
       -- Conform can also run multiple formatters sequentially
-      python = { 'isort', 'black' },
+      python = { 'black' },
       rust = { 'rustfmt' },
       tex = { 'latexindent' },
       ocaml = { 'ocamlformat' },
@@ -969,7 +971,7 @@ do
   local parsers = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' }
   require('nvim-treesitter').install(parsers)
 
-  local additional_parser = { 'tsx', 'tmux' }
+  local additional_parser = { 'tsx', 'tmux', 'python', 'toml' }
   require('nvim-treesitter').install(additional_parser)
 
   ---@param buf integer
@@ -993,7 +995,7 @@ do
 
     -- Enable treesitter based indentation
     if has_indent_query then
-      vim.bo.indentexpr = "v:lua.require'nvim-tresitter'.indentexpr()"
+      vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
     end
   end
 
@@ -1049,6 +1051,4 @@ do
   -- require 'custom.plugins.obsidian' -- TODO: Fix this?
   require 'custom.plugins.coqtail'
   require 'custom.plugins.vimtex'
-  require 'custom.homemade.example'
-  require 'custom.homemade.plant'
 end
