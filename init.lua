@@ -910,6 +910,7 @@ do
   -- require 'custom.plugins.obsidian' -- TODO: Fix this?
   -- require 'custom.plugins.coqtail'
   -- require 'custom.plugins.vimtex' --TODO: Setup typst instead, inspiration https://www.lazyvim.org/extras/lang/typst
+  require 'custom.plugins.esp32'
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --
