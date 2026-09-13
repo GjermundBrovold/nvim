@@ -862,6 +862,8 @@ do
     callback = function(args)
       local buf, filetype = args.buf, args.match
 
+      if filetype == 'tex' or filetype == 'latex' or filetype == 'plaintex' then return end
+
       local language = vim.treesitter.language.get_lang(filetype)
       if not language then return end
 
@@ -905,7 +907,8 @@ do
   -- require 'custom.plugins.ocaml' -- TODO: why did I comment out this?
   -- require 'custom.plugins.obsidian' -- TODO: Fix this?
   -- require 'custom.plugins.coqtail'
-  -- require 'custom.plugins.vimtex' --TODO: Setup typst instead, inspiration https://www.lazyvim.org/extras/lang/typst
+  -- NOTE: vimtex needed for NTNU school projects so my hands are more or less locked.
+  require 'custom.plugins.vimtex' --TODO: Setup typst instead, inspiration https://www.lazyvim.org/extras/lang/typst
   require 'custom.plugins.esp32'
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
