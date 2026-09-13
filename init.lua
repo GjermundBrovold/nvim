@@ -95,6 +95,9 @@ do
   -- instead raise a dialog asking if you wish to save the current file(s)
   -- See `:help 'confirm'`
   vim.o.confirm = true
+
+  -- Sessions settings recommended by auto-session plugin
+  vim.o.sessionoptions = 'blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions'
 end
 
 -- ============================================================
@@ -913,6 +916,7 @@ do
   -- NOTE: vimtex needed for NTNU school projects so my hands are more or less locked.
   require 'custom.plugins.vimtex' --TODO: Setup typst instead, inspiration https://www.lazyvim.org/extras/lang/typst
   require 'custom.plugins.esp32'
+  require 'custom.plugins.auto-session'
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --
