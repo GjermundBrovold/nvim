@@ -25,15 +25,11 @@ do
   -- You can also add relative line numbers, to help with jumping.
   --  Experiment for yourself to see if you like it!
   vim.o.relativenumber = true
-  vim.api.nvim_create_autocmd({'InsertLeave'}, {
-    callback = function()
-      vim.o.relativenumber = true
-    end,
+  vim.api.nvim_create_autocmd({ 'InsertLeave' }, {
+    callback = function() vim.o.relativenumber = true end,
   })
-  vim.api.nvim_create_autocmd({'InsertEnter'}, {
-    callback = function()
-      vim.o.relativenumber = false
-    end,
+  vim.api.nvim_create_autocmd({ 'InsertEnter' }, {
+    callback = function() vim.o.relativenumber = false end,
   })
 
   -- Enable mouse mode, can be useful for resizing splits for example!
@@ -373,10 +369,10 @@ do
   -- ... and there is more!
   --  Check out: https://github.com/nvim-mini/mini.nvim
 
-  -- For center mini files 
+  -- For center mini files
   -- look at: https://github.com/nvim-mini/mini.nvim/discussions/2173
   require('mini.files').setup()
-  vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', {desc = 'Open Mini Files'})
+  vim.keymap.set('n', '-', '<cmd>lua MiniFiles.open()<CR>', { desc = 'Open Mini Files' })
 end
 
 -- ============================================================
