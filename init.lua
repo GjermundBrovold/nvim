@@ -311,7 +311,7 @@ do
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
   vim.pack.add {
     {
-      src = 'https://github.com/rose-pine/neovim.nvim',
+      src = 'https://github.com/rose-pine/neovim',
       name = 'rose-pine',
     },
   }
@@ -915,8 +915,8 @@ do
   -- require 'custom.plugins.obsidian' -- TODO: Fix this?
   -- require 'custom.plugins.coqtail'
   -- NOTE: vimtex needed for NTNU school projects so my hands are more or less locked.
-  require 'custom.plugins.vimtex' --TODO: Setup typst instead, inspiration https://www.lazyvim.org/extras/lang/typst
-  require 'custom.plugins.esp32'
+  -- require 'custom.plugins.vimtex' --TODO: Setup typst instead, inspiration https://www.lazyvim.org/extras/lang/typst
+  -- require 'custom.plugins.esp32'
   require 'custom.plugins.auto-session'
 
   -- NOTE: You can add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
