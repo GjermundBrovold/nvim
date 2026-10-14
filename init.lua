@@ -954,7 +954,6 @@ do
   -- require 'kickstart.plugins.lint'
   -- require 'kickstart.plugins.autopairs'
   -- require 'kickstart.plugins.neo-tree'
-  require 'kickstart.plugins.gitsigns' -- adds gitsigns recommended keymaps
   require 'custom.plugins.lazygit'
   -- require 'custom.plugins.ocaml' -- TODO: why did I comment out this?
   -- require 'custom.plugins.obsidian' -- TODO: Fix this?
